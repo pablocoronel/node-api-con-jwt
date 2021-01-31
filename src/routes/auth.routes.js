@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 const router = Router();
 
-const authRoutes = router;
+router.post('/singup');
 
-export default authRoutes;
+router.post('/singin');
+
+export default router;
