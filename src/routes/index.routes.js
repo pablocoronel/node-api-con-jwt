@@ -3,7 +3,7 @@ import app from '../app';
 
 const router = Router();
 
-const indexRoutes = router.get('/', (req, res) => {
+router.get('/', (req, res) => {
 	res.json({
 		name: app.get('pkg').name,
 		author: app.get('pkg').author,
@@ -12,4 +12,4 @@ const indexRoutes = router.get('/', (req, res) => {
 	});
 });
 
-export default indexRoutes;
+export default router;

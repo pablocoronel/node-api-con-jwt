@@ -19,6 +19,6 @@ app.use(morgan('dev'));
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
-app.use(productRoutes);
+app.use("/products", productRoutes);
 
 export default app;
