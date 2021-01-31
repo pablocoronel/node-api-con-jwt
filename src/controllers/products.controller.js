@@ -25,7 +25,17 @@ const getProduct = async (req, res) => {
 };
 
 // Actualizar
-const updateProduct = async (req, res) => {};
+const updateProduct = async (req, res) => {
+	const updatedProduct = await Product.findByIdAndUpdate(
+		req.params.id,
+		req.body,
+		{
+			new: true, // Devuelve el producto actualizado
+		}
+	);
+
+	res.status(204).json(updatedProduct);
+};
 
 // Borrar
 const deleteProduct = async (req, res) => {};
