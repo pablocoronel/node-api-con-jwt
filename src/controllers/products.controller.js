@@ -1,5 +1,14 @@
+import Product from '../models/Product';
+
 // Crear
-const createProducts = (req, res) => {};
+const createProducts = async (req, res) => {
+	const { name, category, price, imageUrl } = req.body;
+	const newProduct = new Product({ name, category, price, imageUrl });
+
+	const productSaved = await newProduct.save();
+
+	res.status(201).json(productSaved); // 201= creado, json para respuestas de api
+};
 
 // Listar
 const getProducts = (req, res) => {

@@ -13,12 +13,13 @@ const app = express();
 app.set('pkg', pkg);
 
 // Middlewares
-app.use(morgan('dev'));
+app.use(morgan('dev')); //ver en consola los request
+app.use(express.json()); // entender json en response
 
 // Rutas
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
-app.use("/products", productRoutes);
+app.use('/products', productRoutes);
 
 export default app;
