@@ -3,8 +3,8 @@ import morgan from 'morgan';
 import pkg from '../package.json';
 import indexRoutes from './routes/index.routes';
 import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes';
-import productRoutes from './routes/product.routes';
+import userRoutes from './routes/users.routes';
+import productRoutes from './routes/products.routes';
 
 // Aplicacion
 const app = express();
