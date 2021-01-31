@@ -10,14 +10,14 @@ import productRoutes from './routes/products.routes';
 const app = express();
 
 // Variables
-app.set('pkg', pkg);
+// app.set('pkg', pkg);
 
 // Middlewares
 app.use(morgan('dev')); //ver en consola los request
 app.use(express.json()); // entender json en response
 
 // Rutas
-app.use(indexRoutes);
+app.use('/', indexRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use('/products', productRoutes);
