@@ -18,13 +18,17 @@ const getProducts = async (req, res) => {
 };
 
 // Ver individual
-const getProduct = (req, res) => {};
+const getProduct = async (req, res) => {
+	const product = await Product.findById(req.params.id);
+
+	res.status(200).json(product);
+};
 
 // Actualizar
-const updateProduct = (req, res) => {};
+const updateProduct = async (req, res) => {};
 
 // Borrar
-const deleteProduct = (req, res) => {};
+const deleteProduct = async (req, res) => {};
 
 export {
 	createProducts,
