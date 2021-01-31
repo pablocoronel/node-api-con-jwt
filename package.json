@@ -1,4 +1,9 @@
 {
+	"name": "api-node-con-jwt",
+	"version": "1.0.0",
+	"description": "Una rest api con JWT",
+	"main": "index.js",
+	"author": "Pablo Coronel",
 	"scripts": {
 		"dev": "nodemon src/index.js --exec babel-node",
 		"build": "babel src --out-dir build",
