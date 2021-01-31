@@ -1,3 +1,4 @@
+import { model } from 'mongoose';
 import Product from '../models/Product';
 
 // Crear
@@ -38,7 +39,11 @@ const updateProduct = async (req, res) => {
 };
 
 // Borrar
-const deleteProduct = async (req, res) => {};
+const deleteProduct = async (req, res) => {
+	await Product.findByIdAndDelete(req.params.id);
+
+	res.status(204).json(); // 204 es ok vacio
+};
 
 export {
 	createProducts,
