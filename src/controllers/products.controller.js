@@ -11,8 +11,10 @@ const createProducts = async (req, res) => {
 };
 
 // Listar
-const getProducts = (req, res) => {
-	res.send('listado de productos');
+const getProducts = async (req, res) => {
+	const products = await Product.find();
+
+	res.status(200).json(products);
 };
 
 // Ver individual
