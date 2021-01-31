@@ -2,6 +2,6 @@ import { Router } from 'express';
 
 const router = Router();
 
-const userRoutes = router;
+const productRoutes = router;
 
-export default userRoutes;
+export default productRoutes;

@@ -12,4 +12,4 @@ const indexRoutes = router.get('/', (req, res) => {
 	});
 });
 
-export { indexRoutes };
+export default indexRoutes;
