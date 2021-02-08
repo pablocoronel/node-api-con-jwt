@@ -1,6 +1,5 @@
 import express from 'express';
 import morgan from 'morgan';
-import pkg from '../package.json';
 import indexRoutes from './routes/index.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/users.routes';
@@ -18,8 +17,8 @@ app.use(express.json()); // entender json en response
 
 // Rutas
 app.use('/', indexRoutes);
-app.use(authRoutes);
+app.use('/api/auth', authRoutes);
 app.use(userRoutes);
-app.use('/products', productRoutes);
+app.use('/api//products', productRoutes);
 
 export default app;
