@@ -19,6 +19,6 @@ app.use(express.json()); // entender json en response
 app.use('/', indexRoutes);
 app.use('/api/auth', authRoutes);
 app.use(userRoutes);
-app.use('/api//products', productRoutes);
+app.use('/api/products', productRoutes);
 
 export default app;
