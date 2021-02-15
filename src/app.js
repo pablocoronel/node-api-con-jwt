@@ -4,9 +4,11 @@ import indexRoutes from './routes/index.routes';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/users.routes';
 import productRoutes from './routes/products.routes';
+import { createRoles } from './libs/initialSetup';
 
 // Aplicacion
 const app = express();
+createRoles(); // Crea los roles al inicar la app
 
 // Variables
 // app.set('pkg', pkg);
