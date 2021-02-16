@@ -1,12 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from '../config';
 import User from '../models/User';
+import Role from '../models/Role';
 
 const verifyToken = async (req, res, next) => {
 	try {
 		const token = req.headers['x-access-token'];
-
-		console.log(token);
 
 		if (!token) {
 			return res.status(403).json({ message: 'No token provided' });
@@ -15,7 +14,7 @@ const verifyToken = async (req, res, next) => {
 			req.userId = decoded.id;
 
 			const user = await User.findById(decoded.id, { password: 0 }); // No enviar la contraseña
-			console.log(user);
+
 			if (!user) {
 				return res.status(404).json({ message: 'No user found' });
 			}
@@ -27,4 +26,24 @@ const verifyToken = async (req, res, next) => {
 	}
 };
 
-export { verifyToken };
+const isAdmin = async (req, res, next) => {};
+
+const isModerator = async (req, res, next) => {
+	const user = await User.findById(req.userId);
+	// console.log(user)
+
+	const roles = await Role.find({ _id: { $in: user.roles } }); // buscar los roles del usuario
+
+	// Si el usurio tiene el rol Moderador, avanza al controller
+	roles.forEach((item) => {
+		if (item.name === 'moderator') {
+			next();
+			return;
+		}
+	});
+
+	// Si no hay rol Moderador
+	return res.status(403).json({ message: 'Moderator role required' });
+};
+
+export { verifyToken, isAdmin, isModerator };
