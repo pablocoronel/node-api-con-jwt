@@ -8,17 +8,21 @@ router.get('/', productsController.getProducts);
 
 router.post(
 	'/',
-	[authJWT.verifyToken, authJWT.isAdmin],
+	[authJWT.verifyToken, authJWT.isModerator],
 	productsController.createProducts
 );
 
 router.get('/:id', productsController.getProduct);
 
-router.put('/:id', [authJWT.verifyToken], productsController.updateProduct);
+router.put(
+	'/:id',
+	[authJWT.verifyToken, authJWT.isAdmin],
+	productsController.updateProduct
+);
 
 router.delete(
 	'/:id',
-	[authJWT.verifyToken, authJWT.isModerator],
+	[authJWT.verifyToken, authJWT.isAdmin],
 	productsController.deleteProduct
 );
 

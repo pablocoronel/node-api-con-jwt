@@ -26,14 +26,29 @@ const verifyToken = async (req, res, next) => {
 	}
 };
 
-const isAdmin = async (req, res, next) => {};
+const isAdmin = async (req, res, next) => {
+	const user = await User.findById(req.userId);
+
+	const roles = await Role.find({ _id: { $in: user.roles } }); // buscar los roles del usuario
+
+	// Usa un for en lugar de streams, por no ser asincrono el forEach
+	for (let i = 0; i < roles.length; i++) {
+		// Si el usurio tiene el rol Admin, avanza al controller
+		if (roles[i].name === 'admin') {
+			return next();
+		}
+	}
+
+	// Si no hay rol Moderador
+	return res.status(403).json({ message: 'Admin role required' });
+};
 
 const isModerator = async (req, res, next) => {
 	const user = await User.findById(req.userId);
 
 	const roles = await Role.find({ _id: { $in: user.roles } }); // buscar los roles del usuario
 
-	// Usa un for en lugar de streams, por no ser asincronp el forEach
+	// Usa un for en lugar de streams, por no ser asincrono el forEach
 	for (let i = 0; i < roles.length; i++) {
 		// Si el usurio tiene el rol Moderador, avanza al controller
 		if (roles[i].name === 'moderator') {
