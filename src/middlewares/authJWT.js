@@ -30,7 +30,6 @@ const isAdmin = async (req, res, next) => {};
 
 const isModerator = async (req, res, next) => {
 	const user = await User.findById(req.userId);
-	// console.log(user)
 
 	const roles = await Role.find({ _id: { $in: user.roles } }); // buscar los roles del usuario
 
