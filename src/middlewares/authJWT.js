@@ -33,13 +33,13 @@ const isModerator = async (req, res, next) => {
 
 	const roles = await Role.find({ _id: { $in: user.roles } }); // buscar los roles del usuario
 
-	// Si el usurio tiene el rol Moderador, avanza al controller
-	roles.forEach((item) => {
-		if (item.name === 'moderator') {
-			next();
-			return;
+	// Usa un for en lugar de streams, por no ser asincronp el forEach
+	for (let i = 0; i < roles.length; i++) {
+		// Si el usurio tiene el rol Moderador, avanza al controller
+		if (roles[i].name === 'moderator') {
+			return next();
 		}
-	});
+	}
 
 	// Si no hay rol Moderador
 	return res.status(403).json({ message: 'Moderator role required' });
