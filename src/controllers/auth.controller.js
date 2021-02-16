@@ -32,6 +32,30 @@ export const singUp = async (req, res) => {
 
 	res.status(200).json({ token });
 };
+
 export const singIn = async (req, res) => {
-	res.json('singin');
+	const { email, password } = req.body;
+
+	const userFound = await User.findOne({ email }).populate('roles');
+
+	const matchPassword = await User.comparePassword(
+		password,
+		userFound.password
+	);
+
+	if (!matchPassword) {
+		return res
+			.status(401)
+			.json({ token: null, message: 'Invalid password' });
+	}
+
+	const token = jwt.sign({ id: userFound._id }, config.SECRET, {
+		expiresIn: '24h',
+	});
+
+	if (!userFound) {
+		res.status(404).json({ message: 'User not found' });
+	} else {
+		res.status(200).json({ token });
+	}
 };
