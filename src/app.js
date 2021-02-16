@@ -20,7 +20,7 @@ app.use(express.json()); // entender json en response
 // Rutas
 app.use('/', indexRoutes);
 app.use('/api/auth', authRoutes);
-app.use(userRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 
 export default app;

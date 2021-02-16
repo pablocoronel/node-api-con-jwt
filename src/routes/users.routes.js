@@ -1,7 +1,13 @@
 import { Router } from 'express';
+import * as usersController from '../controllers/users.controller';
+import { authJWT } from '../middlewares/index';
 
 const router = Router();
 
-const userRoutes = router;
+router.post(
+	'/',
+	[authJWT.verifyToken, authJWT.isAdmin],
+	usersController.createUser
+);
 
-export default userRoutes;
+export default router;
