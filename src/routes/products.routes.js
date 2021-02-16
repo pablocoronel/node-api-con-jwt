@@ -10,8 +10,8 @@ router.post('/', [verifyToken], productsController.createProducts);
 
 router.get('/:id', productsController.getProduct);
 
-router.put('/:id', productsController.updateProduct);
+router.put('/:id', [verifyToken], productsController.updateProduct);
 
-router.delete('/:id', productsController.deleteProduct);
+router.delete('/:id', [verifyToken], productsController.deleteProduct);
 
 export default router;
