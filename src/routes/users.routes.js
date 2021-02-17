@@ -6,7 +6,12 @@ const router = Router();
 
 router.post(
 	'/',
-	[authJWT.verifyToken, authJWT.isAdmin, verifySingUp.checkRolesExisted],
+	[
+		authJWT.verifyToken,
+		authJWT.isAdmin,
+		verifySingUp.checkRolesExisted,
+		verifySingUp.checkIfUsernameOrEmailIsUnique,
+	],
 	usersController.createUser
 );
 
