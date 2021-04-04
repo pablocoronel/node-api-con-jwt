@@ -26,7 +26,7 @@ export const singUp = async (req, res) => {
 	console.log(savedUser);
 
 	// crear token
-	const token = jwt.sign({ id: savedUser._id }, config.SECRET, {
+	const token = jwt.sign({ id: savedUser._id }, config.SECRET_ACCESS, {
 		expiresIn: '24h',
 	});
 
@@ -49,7 +49,7 @@ export const singIn = async (req, res) => {
 			.json({ token: null, message: 'Invalid password' });
 	}
 
-	const token = jwt.sign({ id: userFound._id }, config.SECRET, {
+	const token = jwt.sign({ id: userFound._id }, config.SECRET_ACCESS, {
 		expiresIn: '24h',
 	});
 

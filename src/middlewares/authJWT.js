@@ -10,7 +10,7 @@ const verifyToken = async (req, res, next) => {
 		if (!token) {
 			return res.status(403).json({ message: 'No token provided' });
 		} else {
-			const decoded = jwt.verify(token, config.SECRET);
+			const decoded = jwt.verify(token, config.SECRET_ACCESS);
 			req.userId = decoded.id;
 
 			const user = await User.findById(decoded.id, { password: 0 }); // No enviar la contraseña
