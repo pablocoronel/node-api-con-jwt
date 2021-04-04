@@ -63,7 +63,7 @@ export const singIn = async (req, res) => {
 
 	// crear refresh token
 	const refresh_token = jwt.sign(
-		{ id: savedUser._id },
+		{ id: userFound._id },
 		config.SECRET_REFRESH,
 		{ expiresIn: '7d' }
 	);
