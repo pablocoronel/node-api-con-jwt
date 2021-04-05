@@ -23,10 +23,9 @@ export const singUp = async (req, res) => {
 	}
 
 	const savedUser = await newUser.save();
-	console.log(savedUser);
 
 	// crear access token
-	const token = jwt.sign({ id: savedUser._id }, config.SECRET_ACCESS, {
+	const access_token = jwt.sign({ id: savedUser._id }, config.SECRET_ACCESS, {
 		expiresIn: '24h',
 	});
 
@@ -37,7 +36,7 @@ export const singUp = async (req, res) => {
 		{ expiresIn: '7d' }
 	);
 
-	res.status(200).json({ token, refresh_token });
+	res.status(200).json({ access_token, refresh_token });
 };
 
 export const singIn = async (req, res) => {
@@ -53,11 +52,11 @@ export const singIn = async (req, res) => {
 	if (!matchPassword) {
 		return res
 			.status(401)
-			.json({ token: null, message: 'Invalid password' });
+			.json({ access_token: null, message: 'Invalid password' });
 	}
 
 	// crear access token
-	const token = jwt.sign({ id: userFound._id }, config.SECRET_ACCESS, {
+	const access_token = jwt.sign({ id: userFound._id }, config.SECRET_ACCESS, {
 		expiresIn: '24h',
 	});
 
@@ -71,6 +70,6 @@ export const singIn = async (req, res) => {
 	if (!userFound) {
 		res.status(404).json({ message: 'User not found' });
 	} else {
-		res.status(200).json({ token, refresh_token });
+		res.status(200).json({ access_token, refresh_token });
 	}
 };
